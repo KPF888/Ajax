@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/mytemplate.js"></script>
+</head>
+
+<body>
+    <div class="box">
+        <!-- 文件选择框 -->
+        <input type="file" id="file" />
+        <!-- 上传文件按钮 -->
+        <button id="upload">上传文件</button>
+        <!-- 服务器返回图片 -->
+        <img src="" alt="" width="800">
+    </div>
+
+    <script type="text/html" class="ftt">
+    <!-- 文件选择框 -->
+    <input type="file" id="file" />
+    <!-- 上传文件按钮 -->
+    <button id="upload">上传文件</button>
+    <!-- 服务器返回图片 -->
+    <img src="http://www.liulongbin.top:3006{{url}}" alt="" width="800">
+    </script>
+
+    <script>
+        var btn = document.querySelector('#upload');
+        var file = document.querySelector('#file');
+        //给按钮绑定点击事件
+        btn.addEventListener('click', function () {
+            var files = file.files;
+            if (files.length === 0) return alert('请选择需要上传的文件');
+            // 将选择的文件放入formdata中
+            var fd = new FormData();
+            fd.append('avatar', files[0]);
+
+            //用xhr发送上传文件请求
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://www.liulongbin.top:3006/api/upload/avatar');
+            xhr.send(fd);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    //渲染页面
+                    console.log(xhr.response);
+                    var htmlStr = template('ftt', JSON.parse(xhr.response));
+                    document.querySelector('.box').innerHTML = '';
+                    document.querySelector('.box').innerHTML = htmlStr;
+                }
+            }
+            fd = null;
+        })
+    </script>
+</body>
+
+</html>

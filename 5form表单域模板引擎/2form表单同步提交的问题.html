@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 1.会跳转到数据提交的url地址，用户体验差 -->
+  <!-- 2.表单同步提交后页面之前的状态和数据会丢失 sessionStorage 和 localStorage 都会消失 -->
+
+  <form action="/login.html" method="post">
+    <input type="text" name="user_name" />
+    <input type="password" name="password" />
+    <button type="submit">提交</button>
+  </form>
+
+
+  <!-- 解决方案 表单采集数据 ajax负责发送数据 -->
+
+
+</body>
+
+</html>

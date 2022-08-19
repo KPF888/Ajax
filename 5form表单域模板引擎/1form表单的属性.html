@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- enctype="application/x-www-form-urlencoded" 默认 -->
+    <!-- enctype="multipart/form-data" 上传文件时必须使用这种方式，不编码 -->
+    <!-- enctype="text/plain" 这种方式会把空格转换成加号 -->
+    <form action="/login" target="_blank" method="post" enctype="text/plain">
+        <input type="text" name="email_or_mobile" />
+        <input type="password" name="password" />
+        <button type="submit">提交</button>
+    </form>
+
+
+</body>
+
+</html>

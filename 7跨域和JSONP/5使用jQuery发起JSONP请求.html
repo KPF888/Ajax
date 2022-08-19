@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+    <script>
+        $.ajax({
+            url: 'http://www.liulongbin.top:3006/api/jsonp',//用jquery发起jsonp请求url后面不需要写回调函数，回调函数为jquery自动随机生成的
+            dataType: 'JSONP',//必须写，代表发起JSONP请求
+            jsonp: 'callback',//指定{callback}变成什么,一般不修改
+            jsonpCallback: 'success',//指定回调函数名称callback={callbackname}
+            success: function (res) {
+                console.log(res);
+            }
+        })
+    </script>
+</body>
+
+</html>

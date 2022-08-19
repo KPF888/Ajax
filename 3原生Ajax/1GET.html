@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点击发送请求</button>
+    <div class="box"></div>
+    <script>
+        //获取元素
+        var btn = document.querySelector('button');
+        var box = document.querySelector('.box');
+
+        // 绑定事件
+        btn.addEventListener('click', function () {
+            // 开始Ajax操作
+            // 1.创建对象
+            var xhr = new XMLHttpRequest();
+            // 2.初始化 设置请求方法和请求地址
+            xhr.open('GET', 'http://127.0.0.1:8000/server?a=11&b=12&c=13');//a=11&b=12&c=13称为查询字符串
+            // 3.发送
+            xhr.send();
+            // 4.事件绑定 处理服务端返回的结果
+            //readyState是xhr对象中的属性 表示状态 0 1 2 3 4
+            //0表示未初始化 1表示已经初始化 2表示已经发送
+            //3表示接收了一部分返回值 4表示接收了所有返回内容
+            //change 改变
+            xhr.onreadystatechange = function () {
+                //判断服务端返回了所有结果
+                if (xhr.readyState === 4) {
+                    // 判断状态码 200 301 404 500 403 401
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        //status与响应数据中的status不是同一个东西
+                        //处理结果 行 头 空行 体
+                        // console.log(xhr.status);//响应行状态码
+                        // console.log(xhr.statusText);//响应字符串
+                        // console.log(xhr.getAllResponseHeaders());//响应头所有内容
+                        // console.log(xhr.response);
+
+                        //在box中打印响应体内容
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            };
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 导入模板引擎 -->
+    <!-- 全局多一个template对象 -->
+    <script src="./lib/template-web.js"></script>
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+
+    <div class="container"></div>
+
+    <!-- 定义模板 -->
+    <!-- 模板必须放在<script>标签中 -->
+    <script type="text/html" id="tpl_user">
+        <h1>{{name}}    {{age}}</h1>
+        {{test}} {{@test}}
+
+        <div>
+            <!-- 条件输出语法 -->
+            {{if flag === 0}}
+            flag的值是0
+            {{else if flag === 1}}
+            flag的值是1
+            {{/if}}
+        </div>
+        <ul>
+            <!-- 循环语法 -->
+            {{each hobby}}
+            <li>索引是{{$index}},循环体是{{$value}}</li>
+            {{/each}}
+        </ul>
+
+        <div>
+            <!-- 过滤器语法 -->
+            {{regTime | dateFormat}}
+        </div>
+    </script>
+    <script>
+        //定义过滤器函数
+        template.defaults.imports.dateFormat = function (date) {
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            return year + '年' + month + '月' + day + '号';
+        }
+
+        // 定义需要渲染的数据
+        var data = {
+            name: 'zs',
+            age: 20,
+            test: '<h3>测试原文输出</h3>',
+            flag: 1,
+            hobby: ['eat', 'sleep', 'dadoudou'],
+            regTime: new Date()
+        };
+
+
+
+        //调用template对象方法
+        //必须使用id
+        var strHtml = template('tpl_user', data);
+        //返回拼接好的页面内容
+        console.log(strHtml);
+        $('.container').html(strHtml);
+    </script>
+</body>
+
+</html>

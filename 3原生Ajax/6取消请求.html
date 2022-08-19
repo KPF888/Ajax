@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="send">点击发送</button>
+    <button class="cancle">点击取消</button>
+    <script>
+        var send = document.querySelector('.send');
+        var cancle = document.querySelector('.cancle');
+
+        let x = null;
+
+        send.addEventListener('click', function () {
+            x = new XMLHttpRequest();
+            x.open('GET', 'http://127.0.0.1:8000/delay');
+            x.send();
+
+            //abort Ajax对象内置方法 取消请求
+            cancle.addEventListener('click', function () {
+                x.abort();
+            })
+        })
+    </script>
+</body>
+
+</html>

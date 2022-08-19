@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function success(data) {
+            console.log('拿到了数据');
+            console.log(data);
+        }
+    </script>
+    <script src="./js/getdata.js?callback=success">
+        //将函数调用放到另一个文件内,另一个文件实际是在服务器,通过查询字符串告诉服务器需要被调用的函数名
+    </script>
+</body>
+
+</html>

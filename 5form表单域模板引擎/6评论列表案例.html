@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评论列表</title>
+    <link rel="stylesheet" href="lib/bootstrap.css">
+    <script src="./lib/jquery.js"></script>
+    <script src="./js/cmt.js"></script>
+</head>
+
+<body style="padding: 15px;">
+
+    <!-- 评论面板 -->
+
+
+    <form class="panel panel-primary sf">
+        <div class="panel-heading">
+            <h3 class="panel-title">发表评论</h3>
+        </div>
+        <div class="panel-body">
+            <div>评论人:</div>
+            <input type="text" class="form-control" name="username">
+            <div>评论内容:</div>
+            <textarea class="form-control" style="resize: none;" name="content"></textarea>
+            <button type="submit" class="btn btn-primary send" style="float: right;">发表评论</button>
+        </div>
+    </form>
+
+
+
+    <!-- 评论列表 -->
+
+    <ul class="list-group">
+
+    </ul>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var jsonStr = '{"a":"hello","b":"world"}';
+        console.log(JSON.parse(jsonStr));//把JSON.parse() 把json数据转换为js的对象
+
+        var data = {
+            name: '小明',
+            sex: '男'
+        }
+        console.log(JSON.stringify(data));//JSON为字符串格式
+    </script>
+</body>
+
+</html>

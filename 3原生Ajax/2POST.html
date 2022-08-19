@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AjaxPost请求</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        //鼠标进入就发请求
+        var box = document.querySelector('.box');
+
+        box.addEventListener('mouseenter', function () {
+            var xhr = new XMLHttpRequest();
+            //初始化
+            xhr.open('POST', 'http://127.0.0.1:8000/server')
+
+            //设置请求头
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');//固定写法,post请求必须写
+            // xhr.send('a=10&b=20&c=30');
+            xhr.send('a:10&b:20&c:30');//发送的数据通过查询字符串的方式填写
+
+
+            xhr.onreadystatechange = function () {
+                //判断服务端返回了所有结果
+                if (xhr.readyState === 4) {
+                    // 判断状态码 200 301 404 500 403 401
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        //处理结果 行 头 空行 体
+                        // console.log(xhr.status);//响应行状态码
+                        // console.log(xhr.statusText);//响应字符串
+                        // console.log(xhr.getAllResponseHeaders());//响应头所有内容
+                        // console.log(xhr.response);
+
+                        //在box中打印响应体内容
+                        box.innerHTML = xhr.response;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

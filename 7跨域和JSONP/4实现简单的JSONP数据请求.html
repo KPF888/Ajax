@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function success(data) {
+            console.log('JSONP传回的数据是：');
+            console.log(data);
+        }
+
+        //1.JSONP与ajax没有任何关系
+        //2.发送的请求为script脚本请求
+        //3.JSONP因为是发送脚本请求，所以只支持默认的get方式
+    </script>
+    <script src="http://www.liulongbin.top:3006/api/jsonp?callback=success">
+            //将函数调用放到另一个文件内,另一个文件实际是在服务器,通过查询字符串告诉服务器需要被调用的函数名
+    </script>
+</body>
+
+</html>

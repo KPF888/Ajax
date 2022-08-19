@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/axios.js"></script>
+</head>
+
+<body>
+    <button>点我测试axios的get请求</button>
+    <button>点我测试axios的post请求</button>
+    <button>点我测试直接使用axios请求</button>
+    <script>
+        document.querySelectorAll('button')[0].addEventListener('click', function () {
+            var data = {
+                name: 'zs',
+                sex: '男'
+            }
+            //axios的get请求发送的数据必须以{ params: data }的形式填入 data是要发送的对象
+            axios.get('http://www.liulongbin.top:3006/api/get', { params: data }).then(function (res) {
+                console.log(res);
+            })
+        })
+
+        document.querySelectorAll('button')[1].addEventListener('click', function () {
+            var data = {
+                name: 'zs',
+                sex: '男'
+            }
+            //注意axios的post请求直接把数据以对象形式填入
+            axios.post('http://www.liulongbin.top:3006/api/post', data).then(function (res) {
+                console.log(res);
+            })
+        })
+
+        document.querySelectorAll('button')[2].addEventListener('click', function () {
+            var data = {
+                name: 'zs',
+                sex: '男'
+            }
+            //直接用axios get请求
+            axios({
+                method: 'get',
+                url: 'http://www.liulongbin.top:3006/api/get',
+                params: data,
+            }).then(function (res) {
+                console.log(res);
+            })
+
+            //直接用axios post请求
+            axios({
+                method: 'post',
+                url: 'http://www.liulongbin.top:3006/api/post',
+                data: data,//post请求要通过data属性提供数据
+            }).then(function (res) {
+                console.log(res);
+            })
+        })
+    </script>
+</body>
+
+</html>

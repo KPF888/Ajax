@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./lib/jquery.js"></script>
+</head>
+
+<body>
+    <button>点我发起jsonp请求</button>
+    <script>
+        $('button').on('click', function () {
+            //发送时会向head中插入一个script标签，在审查中可以看到
+            $.ajax({
+                url: 'http://www.liulongbin.top:3006/api/jsonp',
+                data: {
+                    name: 'kkk',
+                    pwd: '123'
+                },
+                dataType: 'jsonp',
+                jsonpCallback: 'kkkkkk',
+                success: function (res) {
+                    console.log(res);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

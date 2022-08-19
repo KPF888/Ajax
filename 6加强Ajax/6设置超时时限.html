@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        //添加xhr.timeout=??? 规定超时时间 和超时事件 xhr.ontimeout
+        xhr.timeout = 3000;
+        xhr.addEventListener('timeout', function () {
+            alert('请求超时!');
+        })
+
+        xhr.open('GET', 'http://www.liulongbin.top:3006/api/getbooks');
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(JSON.parse(xhr.response));
+            }
+        }
+    </script>
+</body>
+
+</html>

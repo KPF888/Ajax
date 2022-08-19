@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form class="f1">
+        <input type="text" name="username" id="username">
+        <input type="password" name="password" id="password">
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        var form = document.querySelector('.f1');
+        //侦听表单提交事件
+        form.addEventListener('submit', function (e) {
+            //阻止默认提交事件
+            e.preventDefault();
+            var ft = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://www.liulongbin.top:3006/api/formdata');
+            xhr.send(ft);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    console.log(JSON.parse(xhr.response));
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

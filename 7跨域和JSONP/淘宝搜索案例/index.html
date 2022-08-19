@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+  <!-- 导入页面的基本样式 -->
+  <link rel="stylesheet" href="./css/search.css" />
+  <!-- 导入 jQuery -->
+  <script src="./lib/jquery.js"></script>
+  <!-- 导入模板引擎 -->
+  <script src="./lib/template-web.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Logo -->
+    <img src="./images/taobao_logo.png" alt="" class="logo" />
+
+    <div class="box">
+      <!-- tab 栏 -->
+      <div class="tabs">
+        <div class="tab-active">宝贝</div>
+        <div>店铺</div>
+      </div>
+      <!-- 搜索区域（搜索框和搜索按钮） -->
+      <div class="search-box">
+        <input id="ipt" type="text" class="ipt" placeholder="请输入要搜索的内容" />
+        <button class="btnSearch">
+          搜索
+        </button>
+      </div>
+      <!-- 搜索建议列表 -->
+      <div id="suggest-list"></div>
+    </div>
+  </div>
+
+  <!-- 模板结构 -->
+  <script type="text/html" id="tpl-suggestList">
+    {{each result}}
+      <!--搜索建议项-->
+      <div class="suggest-item">{{$value[0]}}</div>
+    {{/each}}
+  </script>
+
+  <script>
+    //定义全局缓存对象
+    var cacheObj = {};
+
+
+
+
+    // 为输入框绑定keyup事件
+    var keywords;
+    $('.ipt').on('keyup', function () {
+      //拿到文本
+      keywords = $(this).val().trim();
+      if (keywords === 0) return;
+      //判断缓存中是否有
+      if (cacheObj[keywords]) {
+        return renderHtml(cacheObj[keywords]);
+      }
+      //触发事件重置防抖
+      clearTimeout(timer);
+      timer = null;
+      timer = setTimeout(() => {
+        getSuggestList(keywords);
+      }, (500));
+    })
+
+    //定义获取列表的函数
+    function getSuggestList(wq) {
+      $.ajax({
+        url: 'http://suggest.taobao.com/sug',
+        dataType: 'jsonp',
+        data: {
+          q: wq,
+          area: 'etao',
+          code: 'utf-8',
+        },
+        success: function (res) {
+          renderHtml(res);
+          //将结果以键值对的形式存入缓存
+          var k = $('.ipt').val().trim();
+          cacheObj[k] = res;
+        }
+      })
+    }
+
+    //定义渲染页面的函数
+    function renderHtml(data) {
+      //没有数据直接return 有数据就渲染
+      if (data.result.length === 0) return $('#suggest-list').empty().hide();
+      var htmlStr = template('tpl-suggestList', data);
+      $('#suggest-list').empty().show().append(htmlStr);
+    }
+
+
+    //利用防抖解决每按一下键盘就发一个请求，应该在输入完成时再发请求
+    // 延时时间0.5秒500ms
+    var timer = null;
+  </script>
+</body>
+
+</html>
